@@ -1,0 +1,3 @@
+enum AdType{
+  reward,interstitial
+}
