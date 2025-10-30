@@ -1,7 +1,7 @@
 name: flutter_android_ad_plugins
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/chengmengyi/flutter_android_ad_plugins
 
 environment:
   sdk: ^3.9.2
