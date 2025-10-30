@@ -4,6 +4,8 @@ A new Flutter project.
 
 ## Getting Started
 
+has switch B plan  max4.6.0 and topon
+
 This project is a starting point for a Flutter
 [plug-in package](https://flutter.dev/to/develop-plugins),
 a specialized package that includes platform-specific implementation code for
