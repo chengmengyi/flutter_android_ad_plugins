@@ -41,21 +41,28 @@ class FlutterAndroidAdPlugins {
   })async{
     _fengKongLogic=fengKongLogic;
 
-    var startInitMax = DateTime.now().millisecondsSinceEpoch;
-    await AppLovinMAX.initialize(maxKey);
-    var maxInitTime = DateTime.now().millisecondsSinceEpoch-startInitMax;
-    iosLoadAdResultCallback.initSdkSuccess.call(maxInitTime,"max");
-
-    var startInitTopon = DateTime.now().millisecondsSinceEpoch;
-    await ATInitManger.initAnyThinkSDK(appidStr: topOnAppId, appidkeyStr: topOnAppKey);
-    var toponInitTime = DateTime.now().millisecondsSinceEpoch-startInitTopon;
-    iosLoadAdResultCallback.initSdkSuccess.call(toponInitTime,"topon");
+    if(maxKey.isNotEmpty){
+      var startInitMax = DateTime.now().millisecondsSinceEpoch;
+      await AppLovinMAX.initialize(maxKey);
+      var maxInitTime = DateTime.now().millisecondsSinceEpoch-startInitMax;
+      iosLoadAdResultCallback.initSdkSuccess.call(maxInitTime,"max");
+    }
+    if(topOnAppId.isNotEmpty){
+      var startInitTopon = DateTime.now().millisecondsSinceEpoch;
+      await ATInitManger.initAnyThinkSDK(appidStr: topOnAppId, appidkeyStr: topOnAppKey);
+      var toponInitTime = DateTime.now().millisecondsSinceEpoch-startInitTopon;
+      iosLoadAdResultCallback.initSdkSuccess.call(toponInitTime,"topon");
+    }
 
     if(kDebugMode&&showMediationDebugger){
       AppLovinMAX.showMediationDebugger();
     }
-    _setMaxAdListener();
-    _setTopOnListener();
+    if(maxKey.isNotEmpty){
+      _setMaxAdListener();
+    }
+    if(topOnAppId.isNotEmpty){
+      _setTopOnListener();
+    }
     _newIntLoadIosAd=NewLoadIosAd(interAd: true, iosLoadAdResultCallback: iosLoadAdResultCallback);
     _newRvLoadIosAd=NewLoadIosAd(interAd: false, iosLoadAdResultCallback: iosLoadAdResultCallback);
     updateAdData(data);
