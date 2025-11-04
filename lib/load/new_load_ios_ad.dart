@@ -1,5 +1,4 @@
 import 'package:flutter_android_ad_plugins/data/ad_money_info_bean.dart';
-import 'package:flutter_android_ad_plugins/flutter_android_ad_plugins.dart';
 import 'package:flutter_android_ad_plugins/hep/ad_type.dart';
 import 'package:flutter_android_ad_plugins/hep/hep.dart';
 import 'package:applovin_max/applovin_max.dart';
@@ -43,10 +42,10 @@ class NewLoadIosAd{
   }
 
   bool loadAdById(AdInfoData value){
-    if(FlutterAndroidAdPlugins.instance.checkFk()){
-      "flutter ios ad --->${interAd ? "inter ad" : "rv ad"}--->fengkong not load ad".log();
-      return false;
-    }
+    // if(FlutterAndroidAdPlugins.instance.checkFk()){
+    //   "flutter ios ad --->${interAd ? "inter ad" : "rv ad"}--->fengkong not load ad".log();
+    //   return false;
+    // }
     var indexWhere = _adInfoList.indexWhere((element) => element.adId==value.adId);
     if(indexWhere<0){
       return false;
