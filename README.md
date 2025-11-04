@@ -4,7 +4,10 @@ A new Flutter project.
 
 ## Getting Started
 
-has switch B plan  max4.6.0 and topon
+0.0.1 has switch B plan  max4.6.0 and topon
+0.0.2 has switch B plan  max4.6.0 and topon  fengkong load topon
+0.0.3 add topon init switch
+
 
 This project is a starting point for a Flutter
 [plug-in package](https://flutter.dev/to/develop-plugins),
