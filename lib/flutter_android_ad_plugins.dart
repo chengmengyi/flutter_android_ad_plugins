@@ -397,6 +397,7 @@ class FlutterAndroidAdPlugins {
 
   updateAdData(ConfigAdData data){
     _priceSwitch=data.priceSwitch;
+    AdNumHep.instance.setMaxNum(data.maxShowNum, data.maxClickNum);
     _newIntLoadIosAd?.updateAdList(data.newInterList);
     _newRvLoadIosAd?.updateAdList(data.newRewardList);
   }
