@@ -412,6 +412,6 @@ class FlutterAndroidAdPlugins {
   }
 
   setEverydayWatchAdNum(int maxShow){
-    AdNumHep.instance.setMaxShowNum(maxShow);
+    AdNumHep.instance.setFkMaxShowNum(maxShow);
   }
 }

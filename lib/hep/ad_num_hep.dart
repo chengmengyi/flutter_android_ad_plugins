@@ -5,7 +5,7 @@ class AdNumHep{
   static final AdNumHep _instance = AdNumHep();
   static AdNumHep get instance => _instance;
 
-  var _maxShow=100,_maxClick=100,_todayShow=0,_todayClick=0;
+  var _maxShow=100,_maxClick=100,_todayShow=0,_todayClick=0,_fkMaxShow=60;
   final StorageData<String> _showNumStorage = StorageData(key: "flutter_ios_ad_show_num", defaultValue: "");
   final StorageData<String> _clickNumStorage = StorageData(key: "flutter_ios_ad_click_num", defaultValue: "");
 
@@ -14,22 +14,29 @@ class AdNumHep{
     _maxClick=maxClick;
     _todayShow=_showNumStorage.getData().getTodayNum();
     _todayClick=_clickNumStorage.getData().getTodayNum();
+    "flutter ios ad --->setMaxNum--->_maxShow:$_maxShow--->_maxClick:$_maxClick--->_todayShow:$_todayShow--->_todayClick:$_todayClick".log();
   }
 
-  setMaxShowNum(int maxShow){
-    _maxShow=maxShow;
+  setFkMaxShowNum(int maxShow){
+    _fkMaxShow=maxShow;
+    "flutter ios ad --->setMaxShowNum--->_maxShow:$_maxShow--->_maxClick:$_maxClick--->_todayShow:$_todayShow--->_todayClick:$_todayClick".log();
   }
 
-  notLoad()=> _todayShow>=_maxShow||_todayClick>=_maxClick;
+  notLoad(){
+    "flutter ios ad --->notLoad--->_maxShow:$_maxShow--->_maxClick:$_maxClick--->_todayShow:$_todayShow--->_todayClick:$_todayClick".log();
+    return _todayShow>=_maxShow||_todayClick>=_maxClick||_todayShow>=_fkMaxShow;
+  }
 
   updateShowNum(){
     _todayShow++;
     _showNumStorage.saveData("${todayTimeStr()}_$_todayShow");
+    "flutter ios ad --->updateShowNum--->_maxShow:$_maxShow--->_maxClick:$_maxClick--->_todayShow:$_todayShow--->_todayClick:$_todayClick".log();
   }
 
   updateClickNum(){
     _todayClick++;
     _clickNumStorage.saveData("${todayTimeStr()}_$_todayClick");
+    "flutter ios ad --->updateClickNum--->_maxShow:$_maxShow--->_maxClick:$_maxClick--->_todayShow:$_todayShow--->_todayClick:$_todayClick".log();
   }
 }
 
