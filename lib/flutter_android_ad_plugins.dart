@@ -38,11 +38,19 @@ class FlutterAndroidAdPlugins {
     required FengKongLogic fengKongLogic,
     required IosLoadAdResultCallback iosLoadAdResultCallback,
     bool showMediationDebugger=false,
+    bool? userConsent,
+    bool? doNotSell,
   })async{
     _fengKongLogic=fengKongLogic;
 
     if(maxKey.isNotEmpty){
       var startInitMax = DateTime.now().millisecondsSinceEpoch;
+      if(null!=userConsent){
+        AppLovinMAX.setHasUserConsent(userConsent);
+      }
+      if(null!=doNotSell){
+        AppLovinMAX.setDoNotSell(doNotSell);
+      }
       await AppLovinMAX.initialize(maxKey);
       var maxInitTime = DateTime.now().millisecondsSinceEpoch-startInitMax;
       iosLoadAdResultCallback.initSdkSuccess.call(maxInitTime,"max");
