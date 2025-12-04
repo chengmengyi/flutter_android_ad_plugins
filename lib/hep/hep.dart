@@ -36,3 +36,13 @@ extension Str2Int on String{
     }
   }
 }
+
+extension Strint2Double on String{
+  double toDouble(){
+    try{
+      return double.parse(this);
+    }catch(e){
+      return 0.0;
+    }
+  }
+}
