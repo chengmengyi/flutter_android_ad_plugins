@@ -28,7 +28,7 @@ class FlutterAndroidAdPluginsPlugin :
         channel.setMethodCallHandler(this)
     }
 
-    override fun onMethodCall(call: MethodCall, result: Result) {
+    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when(call.method){
             "load"-> load()
         }
