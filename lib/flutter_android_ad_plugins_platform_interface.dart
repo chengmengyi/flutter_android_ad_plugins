@@ -26,4 +26,8 @@ abstract class FlutterAndroidAdPluginsPlatform extends PlatformInterface {
   Future<void> load() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<void> init() {
+    throw UnimplementedError('platformVersion() has not been implemented.');
+  }
 }

@@ -477,6 +477,10 @@ class FlutterAndroidAdPlugins {
     AdNumHep.instance.setFkMaxShowNum(maxShow);
   }
 
+  initTest(){
+    FlutterAndroidAdPluginsPlatform.instance.init();
+  }
+
   loadTest(){
     FlutterAndroidAdPluginsPlatform.instance.load();
   }

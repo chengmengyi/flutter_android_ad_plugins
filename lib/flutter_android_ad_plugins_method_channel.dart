@@ -11,6 +11,12 @@ class MethodChannelFlutterAndroidAdPlugins extends FlutterAndroidAdPluginsPlatfo
 
   @override
   Future<void> load() async {
-    final version = await methodChannel.invokeMethod<String>('load');
+    final version = await methodChannel.invokeMethod('load');
+  }
+
+
+  @override
+  Future<void> init() async {
+    final version = await methodChannel.invokeMethod('init');
   }
 }

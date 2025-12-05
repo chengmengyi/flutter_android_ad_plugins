@@ -1,10 +1,13 @@
 package com.flutter.android.flutter_android_ad_plugins
 
+import android.content.Context
 import android.util.Log
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
+import sg.bigo.ads.BigoAdSdk
+import sg.bigo.ads.BigoAdSdk.InitListener
 import sg.bigo.ads.api.AdConfig
 import sg.bigo.ads.api.AdError
 import sg.bigo.ads.api.AdLoadListener
@@ -22,14 +25,17 @@ class FlutterAndroidAdPluginsPlugin :
     // This local reference serves to register the plugin with the Flutter Engine and unregister it
     // when the Flutter Engine is detached from the Activity
     private lateinit var channel: MethodChannel
+    private var mApplicationContext: Context? = null
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_android_ad_plugins")
         channel.setMethodCallHandler(this)
+        mApplicationContext = flutterPluginBinding.getApplicationContext()
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when(call.method){
+            "init"-> init()
             "load"-> load()
         }
     }
@@ -38,6 +44,20 @@ class FlutterAndroidAdPluginsPlugin :
         channel.setMethodCallHandler(null)
     }
 
+    private fun init(){
+        Log.e("qwer", "init")
+        val config = AdConfig.Builder()
+            .setAppId("11052391")
+            .build()
+        if(null!=mApplicationContext){
+            Log.e("qwer", "mApplicationContext")
+            BigoAdSdk.initialize(mApplicationContext!!, config, object : InitListener {
+                override fun onInitialized() {
+                    Log.e("qwer", "onInitialized")
+                }
+            })
+        }
+    }
     private fun load(){
         Log.e("qwer", "kk==onError=====load")
         val popupAdRequest = PopupAdRequest.Builder()
