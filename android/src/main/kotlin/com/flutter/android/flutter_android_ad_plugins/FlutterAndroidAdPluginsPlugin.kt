@@ -61,7 +61,7 @@ class FlutterAndroidAdPluginsPlugin :
     private fun load(){
         Log.e("qwer", "kk==onError=====load")
         val popupAdRequest = PopupAdRequest.Builder()
-            .withSlotId("11052391-11120105")
+            .withSlotId("11052391-11262090")
             .withAge(20)
             .withGender(AdConfig.GENDER_MALE)
             .build()
