@@ -87,6 +87,7 @@ class NewLoadIosAd{
           AppLovinMAX.loadInterstitial(value.adId);
           break;
         case "topon":
+          "flutter ios ad --->ATInterstitialManager.loadInterstitialAd".log();
           ATInterstitialManager.loadInterstitialAd(
             placementID: value.adId,
             extraMap: {},
