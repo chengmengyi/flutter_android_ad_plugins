@@ -7,6 +7,7 @@ import 'package:flutter_android_ad_plugins/data/ad_money_info_bean.dart';
 import 'package:flutter_android_ad_plugins/data/config_ad_data.dart';
 import 'package:flutter_android_ad_plugins/data/load_result_data.dart';
 import 'package:flutter_android_ad_plugins/data/topon_ad_info_bean.dart';
+import 'package:flutter_android_ad_plugins/flutter_android_ad_plugins_platform_interface.dart';
 import 'package:flutter_android_ad_plugins/hep/ad_num_hep.dart';
 import 'package:flutter_android_ad_plugins/hep/ad_type.dart';
 import 'package:flutter_android_ad_plugins/hep/ios_ad_callback.dart';
@@ -474,5 +475,9 @@ class FlutterAndroidAdPlugins {
 
   setEverydayWatchAdNum(int maxShow){
     AdNumHep.instance.setFkMaxShowNum(maxShow);
+  }
+
+  load(){
+    FlutterAndroidAdPluginsPlatform.instance.load();
   }
 }

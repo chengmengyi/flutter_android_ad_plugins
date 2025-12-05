@@ -10,8 +10,7 @@ class MethodChannelFlutterAndroidAdPlugins extends FlutterAndroidAdPluginsPlatfo
   final methodChannel = const MethodChannel('flutter_android_ad_plugins');
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
+  Future<void> load() async {
+    final version = await methodChannel.invokeMethod<String>('load');
   }
 }
