@@ -72,7 +72,6 @@ class NewLoadIosAd{
           ATRewardedManager.loadRewardedVideo(
             placementID: value.adId,
             extraMap: {
-              ATSplashManager.tolerateTimeout(): 20000,
               ATRewardedManager.kATAdLoadingExtraUserIDKey(): '1234',
             },
           );
@@ -90,9 +89,7 @@ class NewLoadIosAd{
         case "topon":
           ATInterstitialManager.loadInterstitialAd(
             placementID: value.adId,
-            extraMap: {
-              ATSplashManager.tolerateTimeout(): 20000
-            },
+            extraMap: {},
           );
           break;
         default:
