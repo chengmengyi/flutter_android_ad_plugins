@@ -9,7 +9,6 @@ import 'package:flutter_android_ad_plugins/hep/ad_num_hep.dart';
 import 'package:flutter_android_ad_plugins/hep/ios_load_ad_result_callback.dart';
 import 'package:thinkup_sdk/at_interstitial.dart';
 import 'package:thinkup_sdk/at_rewarded.dart';
-import 'package:thinkup_sdk/at_splash.dart';
 
 ///新版加载广告
 class NewLoadIosAd{
@@ -72,7 +71,7 @@ class NewLoadIosAd{
           ATRewardedManager.loadRewardedVideo(
             placementID: value.adId,
             extraMap: {
-              ATSplashManager.tolerateTimeout(): 20000,
+              // ATSplashManager.tolerateTimeout(): 20000,
               ATRewardedManager.kATAdLoadingExtraUserIDKey(): '1234',
             },
           );
@@ -91,7 +90,7 @@ class NewLoadIosAd{
           ATInterstitialManager.loadInterstitialAd(
             placementID: value.adId,
             extraMap: {
-              ATSplashManager.tolerateTimeout(): 20000
+              // ATSplashManager.tolerateTimeout(): 20000
             },
           );
           break;

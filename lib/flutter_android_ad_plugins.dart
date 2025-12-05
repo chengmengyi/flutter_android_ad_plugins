@@ -219,6 +219,7 @@ class FlutterAndroidAdPlugins {
       switch (event.interstatus) {
       //广告加载失败
         case InterstitialStatus.interstitialAdFailToLoadAD:
+          "flutter ios ad --->load fail--->reason--->${event.requestMessage}".log();
           _newIntLoadIosAd?.loadAdFail(adUnitId);
           _newRvLoadIosAd?.loadAdFail(adUnitId);
           break;
