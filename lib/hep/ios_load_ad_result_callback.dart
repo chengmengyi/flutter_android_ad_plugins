@@ -1,10 +1,9 @@
-import 'package:applovin_max/applovin_max.dart';
 import 'package:flutter_android_ad_plugins/data/ad_info_data.dart';
 import 'package:flutter_android_ad_plugins/data/ad_money_info_bean.dart';
 class IosLoadAdResultCallback{
   Function(AdInfoData? bean) startLoadAdCallback;
   Function(AdMoneyInfoBean adMoneyInfoBean,AdInfoData? bean,int loadTime) loadAdSuccessCallback;
-  Function(AdInfoData? bean) loadAdFailCallback;
+  Function(AdInfoData? bean,String failReason) loadAdFailCallback;
   Function(int time,String platForm) initSdkSuccess;
 
   IosLoadAdResultCallback({

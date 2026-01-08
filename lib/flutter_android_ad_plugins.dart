@@ -87,8 +87,8 @@ class FlutterAndroidAdPlugins {
             _newRvLoadIosAd?.loadAdSuccess(_createAdMoneyInfoByMax(ad));
           },
           onAdLoadFailedCallback: (ad,error){
-            _newIntLoadIosAd?.loadAdFail(ad);
-            _newRvLoadIosAd?.loadAdFail(ad);
+            _newIntLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
+            _newRvLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
           },
           onAdDisplayedCallback: (ad){
             _adShowing=true;
@@ -128,8 +128,8 @@ class FlutterAndroidAdPlugins {
             _newRvLoadIosAd?.loadAdSuccess(_createAdMoneyInfoByMax(ad));
           },
           onAdLoadFailedCallback: (ad,error){
-            _newIntLoadIosAd?.loadAdFail(ad);
-            _newRvLoadIosAd?.loadAdFail(ad);
+            _newIntLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
+            _newRvLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
           },
           onAdDisplayedCallback: (ad){
             _adShowing=true;
@@ -166,9 +166,8 @@ class FlutterAndroidAdPlugins {
       switch (event.rewardStatus) {
       //广告加载失败
         case RewardedStatus.rewardedVideoDidFailToLoad:
-          "flutter ios ad --->load fail--->reason--->${event.requestMessage}".log();
-          _newIntLoadIosAd?.loadAdFail(adUnitId);
-          _newRvLoadIosAd?.loadAdFail(adUnitId);
+          _newIntLoadIosAd?.loadAdFail(adUnitId,"message:${event.requestMessage}");
+          _newRvLoadIosAd?.loadAdFail(adUnitId,"message:${event.requestMessage}");
           break;
       //广告加载成功
         case RewardedStatus.rewardedVideoDidFinishLoading:
@@ -220,8 +219,8 @@ class FlutterAndroidAdPlugins {
       //广告加载失败
         case InterstitialStatus.interstitialAdFailToLoadAD:
           "flutter ios ad --->load fail--->reason--->${event.requestMessage}".log();
-          _newIntLoadIosAd?.loadAdFail(adUnitId);
-          _newRvLoadIosAd?.loadAdFail(adUnitId);
+          _newIntLoadIosAd?.loadAdFail(adUnitId,"message:${event.requestMessage}");
+          _newRvLoadIosAd?.loadAdFail(adUnitId,"message:${event.requestMessage}");
           break;
       //广告加载成功
         case InterstitialStatus.interstitialAdDidFinishLoading:
