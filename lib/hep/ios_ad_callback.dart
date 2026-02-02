@@ -3,7 +3,7 @@ import 'package:flutter_android_ad_plugins/data/ad_money_info_bean.dart';
 
 class IosAdCallback{
   Function(AdMoneyInfoBean? ad,AdInfoData? bean) showSuccess;
-  Function() showFail;
+  Function(AdInfoData? bean) showFail;
   Function(AdMoneyInfoBean? ad,AdInfoData? bean,bool hasReward) closeAd;
   Function(AdMoneyInfoBean? ad,AdInfoData? bean) revenuePaid;
 

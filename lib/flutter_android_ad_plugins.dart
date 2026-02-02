@@ -102,7 +102,7 @@ class FlutterAndroidAdPlugins {
             _hasReward=false;
             _deleteAdCache(ad.adUnitId);
             loadAd(_getAdInfoBeanById(ad.adUnitId));
-            _iosAdCallback?.showFail.call();
+            _iosAdCallback?.showFail.call(_getAdInfoBeanById(ad.adUnitId));
           },
           onAdClickedCallback: (ad){
             AdNumHep.instance.updateClickNum();
@@ -143,7 +143,7 @@ class FlutterAndroidAdPlugins {
             _hasReward=false;
             _deleteAdCache(ad.adUnitId);
             loadAd(_getAdInfoBeanById(ad.adUnitId));
-            _iosAdCallback?.showFail.call();
+            _iosAdCallback?.showFail.call(_getAdInfoBeanById(ad.adUnitId));
           },
           onAdClickedCallback: (ad){
             AdNumHep.instance.updateClickNum();
@@ -193,7 +193,7 @@ class FlutterAndroidAdPlugins {
           _hasReward=false;
           _deleteAdCache(adUnitId);
           loadAd(_getAdInfoBeanById(adUnitId));
-          _iosAdCallback?.showFail.call();
+          _iosAdCallback?.showFail.call(_getAdInfoBeanById(adUnitId));
           break;
       //广告被点击
         case RewardedStatus.rewardedVideoDidClick:
@@ -243,7 +243,7 @@ class FlutterAndroidAdPlugins {
           _adShowing=false;
           _deleteAdCache(adUnitId);
           loadAd(_getAdInfoBeanById(adUnitId));
-          _iosAdCallback?.showFail.call();
+          _iosAdCallback?.showFail.call(_getAdInfoBeanById(adUnitId));
           break;
       //广告被点击
         case InterstitialStatus.interstitialAdDidClick:
@@ -333,12 +333,12 @@ class FlutterAndroidAdPlugins {
   })async{
     if(_adShowing){
       "flutter ios ad --->ad showing".log();
-      iosAdCallback.showFail.call();
+      iosAdCallback.showFail.call(null);
       return;
     }
     if(checkFk()){
       "flutter ios ad --->fengkong not show ad".log();
-      iosAdCallback.showFail.call();
+      iosAdCallback.showFail.call(null);
       return;
     }
     _iosAdCallback=iosAdCallback;
@@ -355,7 +355,7 @@ class FlutterAndroidAdPlugins {
           }else{
             "flutter ios ad --->$newAdType not Ready".log();
             _deleteAdCache(adId);
-            _iosAdCallback?.showFail.call();
+            _iosAdCallback?.showFail.call(null);
             loadAd(resultData.adBean);
           }
         }else if(adPlat=="topon"){
@@ -364,12 +364,12 @@ class FlutterAndroidAdPlugins {
           }else{
             "flutter ios ad --->$newAdType not Ready".log();
             _deleteAdCache(adId);
-            _iosAdCallback?.showFail.call();
+            _iosAdCallback?.showFail.call(null);
             loadAd(resultData.adBean);
           }
         }else{
           _deleteAdCache(adId);
-          _iosAdCallback?.showFail.call();
+          _iosAdCallback?.showFail.call(null);
           loadAd(resultData.adBean);
         }
       }else if(newAdType==AdType.interstitial){
@@ -379,7 +379,7 @@ class FlutterAndroidAdPlugins {
           }else{
             "flutter ios ad --->$newAdType not Ready".log();
             _deleteAdCache(adId);
-            _iosAdCallback?.showFail.call();
+            _iosAdCallback?.showFail.call(null);
             loadAd(resultData.adBean);
           }
         }else if(adPlat=="topon"){
@@ -388,18 +388,18 @@ class FlutterAndroidAdPlugins {
           }else{
             "flutter ios ad --->$newAdType not Ready".log();
             _deleteAdCache(adId);
-            _iosAdCallback?.showFail.call();
+            _iosAdCallback?.showFail.call(null);
             loadAd(resultData.adBean);
           }
         } else{
           _deleteAdCache(adId);
-          _iosAdCallback?.showFail.call();
+          _iosAdCallback?.showFail.call(null);
           loadAd(resultData.adBean);
         }
       }
     }else{
       loadAdWhenNoCache(adType);
-      _iosAdCallback?.showFail.call();
+      _iosAdCallback?.showFail.call(null);
     }
   }
 
