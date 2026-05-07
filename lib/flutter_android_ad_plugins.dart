@@ -38,9 +38,9 @@ class FlutterAndroidAdPlugins {
     required ConfigAdData data,
     required FengKongLogic fengKongLogic,
     required IosLoadAdResultCallback iosLoadAdResultCallback,
-    bool showMediationDebugger=false,
-    bool? userConsent,
-    bool? doNotSell,
+    // bool showMediationDebugger=false,
+    // bool? userConsent,
+    // bool? doNotSell,
   })async{
     _fengKongLogic=fengKongLogic;
 
