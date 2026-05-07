@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:applovin_max/applovin_max.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_android_ad_plugins/data/ad_info_data.dart';
 import 'package:flutter_android_ad_plugins/data/ad_money_info_bean.dart';
@@ -34,7 +32,7 @@ class FlutterAndroidAdPlugins {
   FengKongLogic? _fengKongLogic;
 
   initMax({
-    required String maxKey,
+    // required String maxKey,
     required String topOnAppId,
     required String topOnAppKey,
     required ConfigAdData data,
@@ -46,18 +44,18 @@ class FlutterAndroidAdPlugins {
   })async{
     _fengKongLogic=fengKongLogic;
 
-    if(maxKey.isNotEmpty){
-      var startInitMax = DateTime.now().millisecondsSinceEpoch;
-      if(null!=userConsent){
-        AppLovinMAX.setHasUserConsent(userConsent);
-      }
-      if(null!=doNotSell){
-        AppLovinMAX.setDoNotSell(doNotSell);
-      }
-      await AppLovinMAX.initialize(maxKey);
-      var maxInitTime = DateTime.now().millisecondsSinceEpoch-startInitMax;
-      iosLoadAdResultCallback.initSdkSuccess.call(maxInitTime,"max");
-    }
+    // if(maxKey.isNotEmpty){
+    //   var startInitMax = DateTime.now().millisecondsSinceEpoch;
+    //   if(null!=userConsent){
+    //     AppLovinMAX.setHasUserConsent(userConsent);
+    //   }
+    //   if(null!=doNotSell){
+    //     AppLovinMAX.setDoNotSell(doNotSell);
+    //   }
+    //   await AppLovinMAX.initialize(maxKey);
+    //   var maxInitTime = DateTime.now().millisecondsSinceEpoch-startInitMax;
+    //   iosLoadAdResultCallback.initSdkSuccess.call(maxInitTime,"max");
+    // }
     if(topOnAppId.isNotEmpty){
       var startInitTopon = DateTime.now().millisecondsSinceEpoch;
       await ATInitManger.initAnyThinkSDK(appidStr: topOnAppId, appidkeyStr: topOnAppKey);
@@ -65,12 +63,12 @@ class FlutterAndroidAdPlugins {
       iosLoadAdResultCallback.initSdkSuccess.call(toponInitTime,"topon");
     }
 
-    if(kDebugMode&&showMediationDebugger){
-      AppLovinMAX.showMediationDebugger();
-    }
-    if(maxKey.isNotEmpty){
-      _setMaxAdListener();
-    }
+    // if(kDebugMode&&showMediationDebugger){
+    //   AppLovinMAX.showMediationDebugger();
+    // }
+    // if(maxKey.isNotEmpty){
+    //   _setMaxAdListener();
+    // }
     if(topOnAppId.isNotEmpty){
       _setTopOnListener();
     }
@@ -79,86 +77,86 @@ class FlutterAndroidAdPlugins {
     updateAdData(data);
   }
 
-  _setMaxAdListener(){
-    AppLovinMAX.setRewardedAdListener(
-        RewardedAdListener(
-          onAdLoadedCallback: (ad){
-            _newIntLoadIosAd?.loadAdSuccess(_createAdMoneyInfoByMax(ad));
-            _newRvLoadIosAd?.loadAdSuccess(_createAdMoneyInfoByMax(ad));
-          },
-          onAdLoadFailedCallback: (ad,error){
-            _newIntLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
-            _newRvLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
-          },
-          onAdDisplayedCallback: (ad){
-            _adShowing=true;
-            _hasReward=false;
-            _deleteAdCache(ad.adUnitId);
-            AdNumHep.instance.updateShowNum();
-            _iosAdCallback?.showSuccess.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId));
-          },
-          onAdDisplayFailedCallback: (ad,error){
-            _adShowing=false;
-            _hasReward=false;
-            _deleteAdCache(ad.adUnitId);
-            loadAd(_getAdInfoBeanById(ad.adUnitId));
-            _iosAdCallback?.showFail.call(_getAdInfoBeanById(ad.adUnitId));
-          },
-          onAdClickedCallback: (ad){
-            AdNumHep.instance.updateClickNum();
-          },
-          onAdHiddenCallback: (ad){
-            _adShowing=false;
-            loadAd(_getAdInfoBeanById(ad.adUnitId));
-            _iosAdCallback?.closeAd.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId),_hasReward);
-          },
-          onAdReceivedRewardCallback: (ad,reward){
-            _hasReward=true;
-          },
-          onAdRevenuePaidCallback: (ad){
-            _iosAdCallback?.revenuePaid.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId));
-          },
-        )
-    );
-
-    AppLovinMAX.setInterstitialListener(
-        InterstitialListener(
-          onAdLoadedCallback: (ad){
-            _newIntLoadIosAd?.loadAdSuccess(_createAdMoneyInfoByMax(ad));
-            _newRvLoadIosAd?.loadAdSuccess(_createAdMoneyInfoByMax(ad));
-          },
-          onAdLoadFailedCallback: (ad,error){
-            _newIntLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
-            _newRvLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
-          },
-          onAdDisplayedCallback: (ad){
-            _adShowing=true;
-            _hasReward=false;
-            _deleteAdCache(ad.adUnitId);
-            AdNumHep.instance.updateShowNum();
-            _iosAdCallback?.showSuccess.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId));
-          },
-          onAdDisplayFailedCallback: (ad,error){
-            _adShowing=false;
-            _hasReward=false;
-            _deleteAdCache(ad.adUnitId);
-            loadAd(_getAdInfoBeanById(ad.adUnitId));
-            _iosAdCallback?.showFail.call(_getAdInfoBeanById(ad.adUnitId));
-          },
-          onAdClickedCallback: (ad){
-            AdNumHep.instance.updateClickNum();
-          },
-          onAdHiddenCallback: (ad){
-            _adShowing=false;
-            loadAd(_getAdInfoBeanById(ad.adUnitId));
-            _iosAdCallback?.closeAd.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId),_hasReward);
-          },
-          onAdRevenuePaidCallback: (ad){
-            _iosAdCallback?.revenuePaid.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId));
-          },
-        )
-    );
-  }
+  // _setMaxAdListener(){
+  //   AppLovinMAX.setRewardedAdListener(
+  //       RewardedAdListener(
+  //         onAdLoadedCallback: (ad){
+  //           _newIntLoadIosAd?.loadAdSuccess(_createAdMoneyInfoByMax(ad));
+  //           _newRvLoadIosAd?.loadAdSuccess(_createAdMoneyInfoByMax(ad));
+  //         },
+  //         onAdLoadFailedCallback: (ad,error){
+  //           _newIntLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
+  //           _newRvLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
+  //         },
+  //         onAdDisplayedCallback: (ad){
+  //           _adShowing=true;
+  //           _hasReward=false;
+  //           _deleteAdCache(ad.adUnitId);
+  //           AdNumHep.instance.updateShowNum();
+  //           _iosAdCallback?.showSuccess.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId));
+  //         },
+  //         onAdDisplayFailedCallback: (ad,error){
+  //           _adShowing=false;
+  //           _hasReward=false;
+  //           _deleteAdCache(ad.adUnitId);
+  //           loadAd(_getAdInfoBeanById(ad.adUnitId));
+  //           _iosAdCallback?.showFail.call(_getAdInfoBeanById(ad.adUnitId));
+  //         },
+  //         onAdClickedCallback: (ad){
+  //           AdNumHep.instance.updateClickNum();
+  //         },
+  //         onAdHiddenCallback: (ad){
+  //           _adShowing=false;
+  //           loadAd(_getAdInfoBeanById(ad.adUnitId));
+  //           _iosAdCallback?.closeAd.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId),_hasReward);
+  //         },
+  //         onAdReceivedRewardCallback: (ad,reward){
+  //           _hasReward=true;
+  //         },
+  //         onAdRevenuePaidCallback: (ad){
+  //           _iosAdCallback?.revenuePaid.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId));
+  //         },
+  //       )
+  //   );
+  //
+  //   AppLovinMAX.setInterstitialListener(
+  //       InterstitialListener(
+  //         onAdLoadedCallback: (ad){
+  //           _newIntLoadIosAd?.loadAdSuccess(_createAdMoneyInfoByMax(ad));
+  //           _newRvLoadIosAd?.loadAdSuccess(_createAdMoneyInfoByMax(ad));
+  //         },
+  //         onAdLoadFailedCallback: (ad,error){
+  //           _newIntLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
+  //           _newRvLoadIosAd?.loadAdFail(ad,"code:${error.code},message:${error.message}");
+  //         },
+  //         onAdDisplayedCallback: (ad){
+  //           _adShowing=true;
+  //           _hasReward=false;
+  //           _deleteAdCache(ad.adUnitId);
+  //           AdNumHep.instance.updateShowNum();
+  //           _iosAdCallback?.showSuccess.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId));
+  //         },
+  //         onAdDisplayFailedCallback: (ad,error){
+  //           _adShowing=false;
+  //           _hasReward=false;
+  //           _deleteAdCache(ad.adUnitId);
+  //           loadAd(_getAdInfoBeanById(ad.adUnitId));
+  //           _iosAdCallback?.showFail.call(_getAdInfoBeanById(ad.adUnitId));
+  //         },
+  //         onAdClickedCallback: (ad){
+  //           AdNumHep.instance.updateClickNum();
+  //         },
+  //         onAdHiddenCallback: (ad){
+  //           _adShowing=false;
+  //           loadAd(_getAdInfoBeanById(ad.adUnitId));
+  //           _iosAdCallback?.closeAd.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId),_hasReward);
+  //         },
+  //         onAdRevenuePaidCallback: (ad){
+  //           _iosAdCallback?.revenuePaid.call(_createAdMoneyInfoByMax(ad),_getAdInfoBeanById(ad.adUnitId));
+  //         },
+  //       )
+  //   );
+  // }
 
   _setTopOnListener(){
     ATListenerManager.rewardedVideoEventHandler.listen((event) async{
@@ -264,12 +262,12 @@ class FlutterAndroidAdPlugins {
     });
   }
 
-  AdMoneyInfoBean _createAdMoneyInfoByMax(MaxAd? ad)=>AdMoneyInfoBean(
-    adUnitId: ad?.adUnitId??"",
-    revenue: ad?.revenue??0.0,
-    networkName: ad?.networkName??"",
-    revenuePrecision: ad?.revenuePrecision??"",
-  );
+  // AdMoneyInfoBean _createAdMoneyInfoByMax(MaxAd? ad)=>AdMoneyInfoBean(
+  //   adUnitId: ad?.adUnitId??"",
+  //   revenue: ad?.revenue??0.0,
+  //   networkName: ad?.networkName??"",
+  //   revenuePrecision: ad?.revenuePrecision??"",
+  // );
 
   Future<AdMoneyInfoBean> _createAdMoneyInfoByTopOn(String adUnitId,Map extraMap)async{
     try{
@@ -349,16 +347,17 @@ class FlutterAndroidAdPlugins {
       var adId = resultData.adBean.adId;
       "flutter ios ad --->start show ad --->type:$adType--->adPlat:$adPlat---->${resultData.adBean.toString()}".log();
       if(newAdType==AdType.reward){
-        if(adPlat=="max"){
-          if(await AppLovinMAX.isRewardedAdReady(adId)==true){
-            AppLovinMAX.showRewardedAd(adId);
-          }else{
-            "flutter ios ad --->$newAdType not Ready".log();
-            _deleteAdCache(adId);
-            _iosAdCallback?.showFail.call(null);
-            loadAd(resultData.adBean);
-          }
-        }else if(adPlat=="topon"){
+        // if(adPlat=="max"){
+        //   if(await AppLovinMAX.isRewardedAdReady(adId)==true){
+        //     AppLovinMAX.showRewardedAd(adId);
+        //   }else{
+        //     "flutter ios ad --->$newAdType not Ready".log();
+        //     _deleteAdCache(adId);
+        //     _iosAdCallback?.showFail.call(null);
+        //     loadAd(resultData.adBean);
+        //   }
+        // }else
+        if(adPlat=="topon"){
           if(await ATRewardedManager.rewardedVideoReady(placementID: adId)==true){
             ATRewardedManager.showRewardedVideo(placementID: adId);
           }else{
@@ -373,16 +372,17 @@ class FlutterAndroidAdPlugins {
           loadAd(resultData.adBean);
         }
       }else if(newAdType==AdType.interstitial){
-        if(adPlat=="max"){
-          if(await AppLovinMAX.isInterstitialReady(adId)==true){
-            AppLovinMAX.showInterstitial(adId);
-          }else{
-            "flutter ios ad --->$newAdType not Ready".log();
-            _deleteAdCache(adId);
-            _iosAdCallback?.showFail.call(null);
-            loadAd(resultData.adBean);
-          }
-        }else if(adPlat=="topon"){
+        // if(adPlat=="max"){
+        //   if(await AppLovinMAX.isInterstitialReady(adId)==true){
+        //     AppLovinMAX.showInterstitial(adId);
+        //   }else{
+        //     "flutter ios ad --->$newAdType not Ready".log();
+        //     _deleteAdCache(adId);
+        //     _iosAdCallback?.showFail.call(null);
+        //     loadAd(resultData.adBean);
+        //   }
+        // }else
+        if(adPlat=="topon"){
           if(await ATInterstitialManager.hasInterstitialAdReady(placementID: adId)==true){
             ATInterstitialManager.showInterstitialAd(placementID: adId);
           }else{
