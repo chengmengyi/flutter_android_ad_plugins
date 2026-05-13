@@ -1,6 +1,6 @@
 name: flutter_android_ad_plugins
 description: "has max and topon ad"
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/chengmengyi/flutter_android_ad_plugins
 
 environment:
@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
-  thinkup_sdk: 1.0.8
+  thinkup_sdk: 1.0.12
 #  applovin_max: 4.6.0
   get_storage: 2.1.1
 

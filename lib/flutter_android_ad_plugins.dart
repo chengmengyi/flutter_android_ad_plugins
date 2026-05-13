@@ -61,7 +61,7 @@ class FlutterAndroidAdPlugins {
     // }
     if (topOnAppId.isNotEmpty) {
       var startInitTopon = DateTime.now().millisecondsSinceEpoch;
-      await ATInitManger.initAnyThinkSDK(
+      await ATInitManger.initThinkUpSDK(
         appidStr: topOnAppId,
         appidkeyStr: topOnAppKey,
       );
