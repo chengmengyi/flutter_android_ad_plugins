@@ -5,7 +5,7 @@ A new Flutter project.
 ## Getting Started
 
 0.1.0 has max and topon
-0.1.2 only topon
+0.1.3 only topon
 
 This project is a starting point for a Flutter
 [plug-in package](https://flutter.dev/to/develop-plugins),

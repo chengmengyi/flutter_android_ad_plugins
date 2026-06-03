@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_android_ad_plugins/data/ad_info_data.dart';
 import 'package:flutter_android_ad_plugins/data/ad_money_info_bean.dart';
 import 'package:flutter_android_ad_plugins/data/config_ad_data.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_android_ad_plugins/hep/ad_num_hep.dart';
 import 'package:flutter_android_ad_plugins/hep/ad_type.dart';
 import 'package:flutter_android_ad_plugins/hep/ios_ad_callback.dart';
 import 'package:flutter_android_ad_plugins/hep/ios_load_ad_result_callback.dart';
+import 'package:flutter_android_ad_plugins/flutter_android_ad_plugins_platform_interface.dart';
 import 'package:flutter_android_ad_plugins/load/new_load_ios_ad.dart';
 import 'package:thinkup_sdk/at_init.dart';
 import 'package:thinkup_sdk/at_interstitial.dart';
@@ -560,5 +562,14 @@ class FlutterAndroidAdPlugins {
 
   setEverydayWatchAdNum(int maxShow) {
     AdNumHep.instance.setFkMaxShowNum(maxShow);
+  }
+
+  showDebuggerUI({String? debugKey}) {
+    if(!kDebugMode){
+      return;
+    }
+    FlutterAndroidAdPluginsPlatform.instance.showDebuggerUI(
+      debugKey: debugKey,
+    );
   }
 }

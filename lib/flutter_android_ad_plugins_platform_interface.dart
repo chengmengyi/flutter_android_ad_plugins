@@ -8,7 +8,8 @@ abstract class FlutterAndroidAdPluginsPlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static FlutterAndroidAdPluginsPlatform _instance = MethodChannelFlutterAndroidAdPlugins();
+  static FlutterAndroidAdPluginsPlatform _instance =
+      MethodChannelFlutterAndroidAdPlugins();
 
   /// The default instance of [FlutterAndroidAdPluginsPlatform] to use.
   ///
@@ -25,5 +26,9 @@ abstract class FlutterAndroidAdPluginsPlatform extends PlatformInterface {
 
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
+  }
+
+  Future<void> showDebuggerUI({String? debugKey}) {
+    throw UnimplementedError('showDebuggerUI() has not been implemented.');
   }
 }
