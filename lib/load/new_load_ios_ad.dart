@@ -123,12 +123,13 @@ class NewLoadIosAd{
     }
   }
 
-  loadAdFail(String id,String failReason){
+  loadAdFail(String id,String failReason)async{
     var adBean = getAdInfoBeanById(id);
     if(null!=adBean){
       "flutter ios ad --->${interAd?"inter ad":"rv ad"}--->$id load ad fail--->failReason:$failReason".log();
       iosLoadAdResultCallback.loadAdFailCallback.call(adBean,failReason);
       _loadingList.remove(adBean.adId);
+      await Future.delayed(Duration(milliseconds: 1000));
       loadAdById(adBean);
     }
   }
