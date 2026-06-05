@@ -368,7 +368,7 @@ class FlutterAndroidAdPlugins {
           var toponAdInfoBean = topOnAdInfoList[indexWhere];
           return AdMoneyInfoBean(
             adUnitId: toponAdInfoBean.adunitId ?? "",
-            revenue: toponAdInfoBean.publisherRevenue ?? 0,
+            revenue: toponAdInfoBean.publisherRevenue ?? 0.0,
             networkName: toponAdInfoBean.networkType ?? "",
             revenuePrecision: toponAdInfoBean.precision ?? "",
           );
@@ -376,7 +376,7 @@ class FlutterAndroidAdPlugins {
       }
       return AdMoneyInfoBean(
         adUnitId: adUnitId,
-        revenue: extraMap["publisher_revenue"] ?? 0,
+        revenue: extraMap["publisher_revenue"]?.toString().toDouble() ?? 0.0,
         networkName: extraMap["network_name"] ?? "",
         revenuePrecision: extraMap["precision"] ?? "",
       );
