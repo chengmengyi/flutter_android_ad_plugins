@@ -62,14 +62,14 @@ class FlutterAndroidAdPlugins {
     //   iosLoadAdResultCallback.initSdkSuccess.call(maxInitTime,"max");
     // }
     if (topOnAppId.isNotEmpty) {
-      var startInitTopon = DateTime.now().millisecondsSinceEpoch;
       try {
         await ATInitManger.setPresetPlacementConfigPath(
           pathStr: "localStrategy",
         ).timeout(const Duration(seconds: 2));
-      } catch (e) {
+      } catch (_) {
 
       }
+      var startInitTopon = DateTime.now().millisecondsSinceEpoch;
       await ATInitManger.initThinkUpSDK(
         appidStr: topOnAppId,
         appidkeyStr: topOnAppKey,
