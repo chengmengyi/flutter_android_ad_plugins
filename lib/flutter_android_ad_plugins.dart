@@ -209,7 +209,7 @@ class FlutterAndroidAdPlugins {
           _hasReward = false;
           _deleteAdCache(adUnitId);
           AdNumHep.instance.updateShowNum();
-          var adMoneyInfoBean = await _createAdMoneyInfoByTopOn(
+          var adMoneyInfoBean = await _getAdMoneyInfoWhenShowSuccess(
             adUnitId,
             event.extraMap,
           );
@@ -291,7 +291,7 @@ class FlutterAndroidAdPlugins {
           _hasReward = false;
           _deleteAdCache(adUnitId);
           AdNumHep.instance.updateShowNum();
-          var adMoneyInfoBean = await _createAdMoneyInfoByTopOn(
+          var adMoneyInfoBean = await _getAdMoneyInfoWhenShowSuccess(
             adUnitId,
             event.extraMap,
           );
@@ -340,6 +340,25 @@ class FlutterAndroidAdPlugins {
   //   revenuePrecision: ad?.revenuePrecision??"",
   // );
 
+  Future<AdMoneyInfoBean> _getAdMoneyInfoWhenShowSuccess(String adUnitId,Map extraMap)async{
+    try{
+      "flutter ios ad --->publisher_revenue--->adUnitId:$adUnitId--->${extraMap}".log();
+      return AdMoneyInfoBean(
+        adUnitId: adUnitId,
+        revenue: extraMap["publisher_revenue"]?.toString().toDouble() ?? 0.0,
+        networkName: extraMap["network_name"] ?? "",
+        revenuePrecision: extraMap["precision"] ?? "",
+      );
+    }catch(e){
+      return AdMoneyInfoBean(
+        adUnitId: "",
+        revenue: 0.0,
+        networkName: "",
+        revenuePrecision: "",
+      );
+    }
+  }
+
   Future<AdMoneyInfoBean> _createAdMoneyInfoByTopOn(
     String adUnitId,
     Map extraMap,
@@ -357,7 +376,7 @@ class FlutterAndroidAdPlugins {
           placementID: adUnitId,
         );
       }
-      // "flutter ios ad --->_createAdMoneyInfoByTopOn--->adUnitId:$adUnitId--->$s".log();
+      "flutter ios ad --->_createAdMoneyInfoByTopOn--->adUnitId:$adUnitId--->$s".log();
       if (s.isNotEmpty) {
         var topOnAdInfoList = _getTopOnAdInfoList(s);
         var indexWhere = topOnAdInfoList.indexWhere(
