@@ -340,16 +340,20 @@ class FlutterAndroidAdPlugins {
   //   revenuePrecision: ad?.revenuePrecision??"",
   // );
 
-  Future<AdMoneyInfoBean> _getAdMoneyInfoWhenShowSuccess(String adUnitId,Map extraMap)async{
-    try{
-      "flutter ios ad --->publisher_revenue--->adUnitId:$adUnitId--->${extraMap}".log();
+  Future<AdMoneyInfoBean> _getAdMoneyInfoWhenShowSuccess(
+    String adUnitId,
+    Map extraMap,
+  ) async {
+    try {
+      "flutter ios ad --->publisher_revenue--->adUnitId:$adUnitId--->$extraMap"
+          .log();
       return AdMoneyInfoBean(
         adUnitId: adUnitId,
         revenue: extraMap["publisher_revenue"]?.toString().toDouble() ?? 0.0,
         networkName: extraMap["network_name"] ?? "",
         revenuePrecision: extraMap["precision"] ?? "",
       );
-    }catch(e){
+    } catch (e) {
       return AdMoneyInfoBean(
         adUnitId: "",
         revenue: 0.0,
@@ -376,7 +380,8 @@ class FlutterAndroidAdPlugins {
           placementID: adUnitId,
         );
       }
-      "flutter ios ad --->_createAdMoneyInfoByTopOn--->adUnitId:$adUnitId--->$s".log();
+      "flutter ios ad --->_createAdMoneyInfoByTopOn--->adUnitId:$adUnitId--->$s"
+          .log();
       if (s.isNotEmpty) {
         var topOnAdInfoList = _getTopOnAdInfoList(s);
         var indexWhere = topOnAdInfoList.indexWhere(
@@ -584,11 +589,9 @@ class FlutterAndroidAdPlugins {
   }
 
   showDebuggerUI({String? debugKey}) {
-    if(!kDebugMode){
+    if (!kDebugMode) {
       return;
     }
-    FlutterAndroidAdPluginsPlatform.instance.showDebuggerUI(
-      debugKey: debugKey,
-    );
+    FlutterAndroidAdPluginsPlatform.instance.showDebuggerUI(debugKey: debugKey);
   }
 }
