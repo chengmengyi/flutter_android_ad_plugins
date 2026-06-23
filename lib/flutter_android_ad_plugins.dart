@@ -63,7 +63,13 @@ class FlutterAndroidAdPlugins {
     // }
     if (topOnAppId.isNotEmpty) {
       var startInitTopon = DateTime.now().millisecondsSinceEpoch;
-      ATInitManger.setPresetPlacementConfigPath(pathStr: "localStrategy");
+      try {
+        await ATInitManger.setPresetPlacementConfigPath(
+          pathStr: "localStrategy",
+        ).timeout(const Duration(seconds: 2));
+      } catch (e) {
+
+      }
       await ATInitManger.initThinkUpSDK(
         appidStr: topOnAppId,
         appidkeyStr: topOnAppKey,
