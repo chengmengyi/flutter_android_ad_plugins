@@ -145,7 +145,7 @@ class NewLoadIosAd {
     if (indexWhere >= 0) {
       return _adInfoList[indexWhere];
     }
-    return null;
+    return _resultMap[id]?.adBean;
   }
 
   bool checkHasCache(String adId) {
