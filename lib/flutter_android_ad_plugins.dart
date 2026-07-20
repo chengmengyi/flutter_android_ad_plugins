@@ -457,17 +457,16 @@ class FlutterAndroidAdPlugins {
       "flutter ios ad --->start show ad --->type:$adType--->adPlat:$adPlat---->${resultData.adBean.toString()}"
           .log();
       if (newAdType == AdType.reward) {
-        // if(adPlat=="max"){
-        //   if(await AppLovinMAX.isRewardedAdReady(adId)==true){
-        //     AppLovinMAX.showRewardedAd(adId);
-        //   }else{
-        //     "flutter ios ad --->$newAdType not Ready".log();
-        //     _deleteAdCache(adId);
-        //     _iosAdCallback?.showFail.call(null);
-        //     loadAd(resultData.adBean);
-        //   }
-        // }else
-        if (adPlat == "topon") {
+        if(adPlat=="max"){
+          if(await AppLovinMAX.isRewardedAdReady(adId)==true){
+            AppLovinMAX.showRewardedAd(adId);
+          }else{
+            "flutter ios ad --->$newAdType not Ready".log();
+            _deleteAdCache(adId);
+            _iosAdCallback?.showFail.call(null);
+            loadAd(resultData.adBean);
+          }
+        }else if (adPlat == "topon") {
           if (await ATRewardedManager.rewardedVideoReady(placementID: adId) ==
               true) {
             ATRewardedManager.showRewardedVideo(placementID: adId);
@@ -483,17 +482,16 @@ class FlutterAndroidAdPlugins {
           loadAd(resultData.adBean);
         }
       } else if (newAdType == AdType.interstitial) {
-        // if(adPlat=="max"){
-        //   if(await AppLovinMAX.isInterstitialReady(adId)==true){
-        //     AppLovinMAX.showInterstitial(adId);
-        //   }else{
-        //     "flutter ios ad --->$newAdType not Ready".log();
-        //     _deleteAdCache(adId);
-        //     _iosAdCallback?.showFail.call(null);
-        //     loadAd(resultData.adBean);
-        //   }
-        // }else
-        if (adPlat == "topon") {
+        if(adPlat=="max"){
+          if(await AppLovinMAX.isInterstitialReady(adId)==true){
+            AppLovinMAX.showInterstitial(adId);
+          }else{
+            "flutter ios ad --->$newAdType not Ready".log();
+            _deleteAdCache(adId);
+            _iosAdCallback?.showFail.call(null);
+            loadAd(resultData.adBean);
+          }
+        }else if (adPlat == "topon") {
           if (await ATInterstitialManager.hasInterstitialAdReady(
                 placementID: adId,
               ) ==
