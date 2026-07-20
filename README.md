@@ -4,8 +4,8 @@ A new Flutter project.
 
 ## Getting Started
 
-0.1.0 has max and topon
 0.1.7 only topon
+0.1.8 has max and topon
 
 This project is a starting point for a Flutter
 [plug-in package](https://flutter.dev/to/develop-plugins),

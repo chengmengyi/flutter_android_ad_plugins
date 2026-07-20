@@ -2,7 +2,7 @@ import 'package:flutter_android_ad_plugins/data/ad_money_info_bean.dart';
 import 'package:flutter_android_ad_plugins/flutter_android_ad_plugins.dart';
 import 'package:flutter_android_ad_plugins/hep/ad_type.dart';
 import 'package:flutter_android_ad_plugins/hep/hep.dart';
-// import 'package:applovin_max/applovin_max.dart';
+import 'package:applovin_max/applovin_max.dart';
 import 'package:flutter_android_ad_plugins/data/ad_info_data.dart';
 import 'package:flutter_android_ad_plugins/data/load_result_data.dart';
 import 'package:flutter_android_ad_plugins/hep/ad_num_hep.dart';
@@ -69,9 +69,9 @@ class NewLoadIosAd {
     if (value.adType == AdType.reward) {
       iosLoadAdResultCallback.startLoadAdCallback.call(value);
       switch (value.adPlat) {
-        // case "max":
-        //   AppLovinMAX.loadRewardedAd(value.adId);
-        //   break;
+        case "max":
+          AppLovinMAX.loadRewardedAd(value.adId);
+          break;
         case "topon":
           ATRewardedManager.loadRewardedVideo(
             placementID: value.adId,
@@ -88,9 +88,9 @@ class NewLoadIosAd {
     } else if (value.adType == AdType.interstitial) {
       iosLoadAdResultCallback.startLoadAdCallback.call(value);
       switch (value.adPlat) {
-        // case "max":
-        //   AppLovinMAX.loadInterstitial(value.adId);
-        //   break;
+        case "max":
+          AppLovinMAX.loadInterstitial(value.adId);
+          break;
         case "topon":
           ATInterstitialManager.loadInterstitialAd(
             placementID: value.adId,
